@@ -1,0 +1,9 @@
+["../imgs/Emiya.jpg" , "../imgs/Genkai.jpg" , "../imgs/Gilgamesh.jpeg" ,
+"../imgs/Gohan.jpg" , "../imgs/GonKillua-1.jpg" , "../imgs/GonKillua.jpg" ,
+"../imgs/Hiei.jpg" , "../imgs/Hiei-1.jpg" , "../imgs/Hiei-2.jpg" ,
+"../imgs/Hiei-3.jpg" , "../imgs/Hiei-4.jpg" , "../imgs/Itsuki.jpg" ,
+"../imgs/Kakashi.jpg" , "../imgs/Killua.jpg" , "../imgs/Koenma.jpg" ,
+"../imgs/Kuruma.jpg" , "../imgs/SaberEmiya.avif" , "../imgs/SaberEmiya1.jpg" ,
+"../imgs/Shigure.jpg" , "../imgs/Shinobu.jpg" , "../imgs/sss.jpg" ,
+"../imgs/Trunks.jpg" , "../imgs/Yuji.jpg" , "../imgs/Yusuke-1.jpg" ,
+"../imgs/Yusuke-3.jpg" , "../imgs/Yusuke.jpg" ]
