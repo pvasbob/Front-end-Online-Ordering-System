@@ -1,19 +1,19 @@
 const products = [
   {
     image: "../imgs/Yusuke-1.jpg",
-    name: "Emiya",
+    name: "Yusuke",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
   {
     image: "../imgs/Yusuke-3.jpg",
-    name: "Emiya",
+    name: "Yusuke-3",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
   {
     image: "../imgs/Yusuke.jpg",
-    name: "Emiya",
+    name: "Yusuke",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
@@ -27,137 +27,143 @@ const products = [
 
   {
     image: "../imgs/Genkai.jpg",
-    name: "Emiya",
+    name: "Genkai",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
 
   {
     image: "../imgs/Gilgamesh.jpeg",
-    name: "Emiya",
+    name: "Gilgamesh",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
 
   {
     image: "../imgs/Gohan.jpg",
-    name: "Emiya",
+    name: "Gohan",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
 
   {
     image: "../imgs/GonKillua-1.jpg",
-    name: "Emiya",
+    name: "GonKillua-1",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
 
   {
     image: "../imgs/GonKillua.jpg",
-    name: "Emiya",
+    name: "GonKillua",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
 
   {
     image: "../imgs/Hiei.jpg",
-    name: "Emiya",
+    name: "Hiei",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
 
   {
     image: "../imgs/Hiei-2.jpg",
-    name: "Emiya",
+    name: "Hiei-2",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
 
   {
     image: "../imgs/Hiei-3.jpg",
-    name: "Emiya",
+    name: "Hiei-3",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
 
   {
     image: "../imgs/Hiei-4.jpg",
-    name: "Emiya",
+    name: "Hiei",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
 
   {
     image: "../imgs/Itsuki.jpg",
-    name: "Emiya",
+    name: "Itsuki",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
 
   {
     image: "../imgs/Kakashi.jpg",
-    name: "Emiya",
+    name: "Kakashi",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
 
   {
     image: "../imgs/Killua.jpg",
-    name: "Emiya",
+    name: "Killua",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
 
   {
     image: "../imgs/Koenma.jpg",
-    name: "Emiya",
+    name: "Koenma",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
 
   {
     image: "../imgs/Kuruma.jpg",
-    name: "Emiya",
+    name: "Kuruma",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
   {
     image: "../imgs/SaberEmiya.avif",
-    name: "Emiya",
+    name: "SaberEmiya",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
 
   {
     image: "../imgs/Shigure.jpg",
-    name: "Emiya",
+    name: "Shigure",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
 
   {
     image: "../imgs/Shinobu.jpg",
-    name: "Emiya",
+    name: "Shinobu",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
   {
     image: "../imgs/sss.jpg",
-    name: "Emiya",
+    name: "sss",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
   {
     image: "../imgs/Trunks.jpg",
-    name: "Emiya",
+    name: "Trunks",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
   {
     image: "../imgs/Yuji.jpg",
-    name: "Emiya",
+    name: "Yuji",
     rating: { stars: 4.5, count: 87 },
     priceCents: 1090,
   },
 ];
+
+products.forEach((product) => {
+  product.id = crypto.randomUUID();
+});
+
+console.log(products);

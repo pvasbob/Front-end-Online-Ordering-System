@@ -44,11 +44,50 @@ products.forEach((prod, index) => {
         Added
       </div>
 
-      <button class="add-to-cart-button button-primary">Add to Cart</button>
+      <button class="add-to-cart-button button-primary js-add-to-cart-button" data-prod-id="${
+        prod.id
+      }">Add to Cart</button>
     </div>
         `;
 });
 
 document.querySelector(".products-grid").innerHTML = productHTML;
+
+// document.querySelector(".add-to-cart-button").addEventListener("click", () => {
+//   console.log("helloxxx");
+//   document.querySelector(".cart-item-container").innerHTML += "hello";
+// });
+
+document
+  .querySelectorAll(".js-add-to-cart-button")
+  .forEach((addProdButton, index) => {
+    addProdButton.addEventListener("click", () => {
+      //
+      const prodId = addProdButton.dataset.prodId;
+      //
+      // DONT DELETE COMMENT BELOW.
+      // wrong code below. reason:
+      // If there is no item from the start in cart, the code body will actually never run, and thus no item will be added to cart.
+      // cart.forEach((item) => {
+      //   console.log("hello");
+      //   console.log(prodName);
+      //   console.log(item.prodName);
+      //   if (prodName === item.prodName) item.quantity++;
+      //   else cart.push({ prodName, quantity: 1 });
+      // });
+
+      // declare existItem to record if the current prod exist in cart.
+      let existItem;
+
+      cart.forEach((item) => {
+        if (prodId === item.prodId) existItem = item;
+      });
+
+      if (existItem) existItem.quantity++;
+      else cart.push({ prodId, quantity: 1 });
+
+      // cart.push({ prodName, quantity: 1 });
+    });
+  });
 
 // .toFixed     : keep two decimal.
