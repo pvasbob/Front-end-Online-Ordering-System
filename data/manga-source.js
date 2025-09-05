@@ -166,4 +166,4 @@ products.forEach((product) => {
   product.id = crypto.randomUUID();
 });
 
-console.log(products);
+//

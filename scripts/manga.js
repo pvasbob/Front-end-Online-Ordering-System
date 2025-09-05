@@ -86,8 +86,18 @@ document
       if (existItem) existItem.quantity++;
       else cart.push({ prodId, quantity: 1 });
 
-      // cart.push({ prodName, quantity: 1 });
+      let cartQuantity = 0;
+      cart.forEach((item) => {
+        cartQuantity += item.quantity;
+        // DONT DELETE:
+        // The code below DOES NOT WORK becuase .innerHTML gives strings, so item.quantity
+        // will first be converted to string or character and then pile into .innerHTML
+        // document.querySelector(".cart-quantity").innerHTML += item.quantity;
+      });
+      document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
     });
   });
 
+// the class needs to be separated between .css and .js
+//  any classes used for .js should start with 'js'
 // .toFixed     : keep two decimal.
