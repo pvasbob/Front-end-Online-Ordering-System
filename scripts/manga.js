@@ -64,6 +64,23 @@ document
     addProdButton.addEventListener("click", () => {
       //
       const prodId = addProdButton.dataset.prodId;
+
+      // get the select quantity.
+      let selectQuantity = Number(
+        addProdButton
+          .closest(".product-container")
+          .querySelector(".product-quantity-container select").value
+      );
+
+      // products.forEach((item) => {
+      //   if (prodId === item.id)
+      //     selectQuantity = document.querySelector(
+      //       ".product-quantity-container select"
+      //     ).value;
+      // });
+
+      // console.log("selected:" + selectQuantity);
+
       //
       // DONT DELETE COMMENT BELOW.
       // wrong code below. reason:
@@ -83,9 +100,8 @@ document
         if (prodId === item.prodId) existItem = item;
       });
 
-      if (existItem) existItem.quantity++;
-      else cart.push({ prodId, quantity: 1 });
-
+      if (existItem) existItem.quantity += selectQuantity;
+      else cart.push({ prodId, quantity: selectQuantity });
       let cartQuantity = 0;
       cart.forEach((item) => {
         cartQuantity += item.quantity;
