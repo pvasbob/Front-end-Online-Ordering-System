@@ -1,4 +1,6 @@
 // import { products } from "./manga-source.js";
+import { cart } from "../data/cart.js";
+import { products } from "../data/manga-source.js";
 
 let productHTML = ``;
 products.forEach((prod, index) => {
