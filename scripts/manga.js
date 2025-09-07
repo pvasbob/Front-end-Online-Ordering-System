@@ -1,6 +1,8 @@
-// import { products } from "./manga-source.js";
+// import variables
 import { cart } from "../data/cart.js";
 import { products } from "../data/manga-source.js";
+// import function
+import { addToCart } from "../data/cart.js";
 
 let productHTML = ``;
 products.forEach((prod, index) => {
@@ -54,73 +56,35 @@ products.forEach((prod, index) => {
 });
 
 document.querySelector(".products-grid").innerHTML = productHTML;
-
-// document.querySelector(".add-to-cart-button").addEventListener("click", () => {
-//   console.log("helloxxx");
-//   document.querySelector(".cart-item-container").innerHTML += "hello";
-// });
-
 document
   .querySelectorAll(".js-add-to-cart-button")
   .forEach((addProdButton, index) => {
     addProdButton.addEventListener("click", (event) => {
-      //
+      // get product id
       const prodId = addProdButton.dataset.prodId;
 
-      // get the select quantity.
-      let selectQuantity = Number(
-        addProdButton
-          .closest(".product-container")
-          .querySelector(".product-quantity-container select").value
-      );
-
-      // Another way of getting the select quantity.
-      let selectQuantity_0 = Number(
-        event.target
-          .closest(".product-container")
-          .querySelector(".product-quantity-container select").value
-      );
-
-      // Another way of getting the select quantity.
-      let selectQuantity_1 = Number(
-        document.querySelector(`.js-select-quantity-${prodId}`).value
-      );
-
-      console.log(selectQuantity === selectQuantity_0);
-
-      //
-      // DONT DELETE COMMENT BELOW.
-      // wrong code below. reason:
-      // If there is no item from the start in cart, the code body will actually never run, and thus no item will be added to cart.
-      // cart.forEach((item) => {
-      //   console.log("hello");
-      //   console.log(prodName);
-      //   console.log(item.prodName);
-      //   if (prodName === item.prodName) item.quantity++;
-      //   else cart.push({ prodName, quantity: 1 });
-      // });
-
-      // declare existItem to record if the current prod exist in cart.
-      let existItem;
-
-      cart.forEach((item) => {
-        if (prodId === item.prodId) existItem = item;
-      });
-
-      if (existItem) existItem.quantity += selectQuantity;
-      else cart.push({ prodId, quantity: selectQuantity });
-      let cartQuantity = 0;
-      cart.forEach((item) => {
-        cartQuantity += item.quantity;
-        // DONT DELETE:
-        // The code below DOES NOT WORK becuase .innerHTML gives strings, so item.quantity
-        // will first be converted to string or character and then pile into .innerHTML
-        // document.querySelector(".cart-quantity").innerHTML += item.quantity;
-      });
-      document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+      // add to cart function.
+      addToCart(addProdButton, prodId, event);
+      // update cart quantity.
+      updateCartQuantity(cart);
     });
   });
 
 // the class needs to be separated between .css and .js
 //  any classes used for .js should start with 'js'
 // .toFixed     : keep two decimal.
+
+// This function is about updating the webpage instead of handling the cart.
+// Basically any function which has algo inside is moved to other module .js.
+function updateCartQuantity(cart) {
+  // update cart total quantity.
+  let cartQuantity = 0;
+  cart.forEach((item) => {
+    cartQuantity += item.quantity;
+    // DONT DELETE:
+    // The code below DOES NOT WORK becuase .innerHTML gives strings, so item.quantity
+    // will first be converted to string or character and then pile into .innerHTML
+    // document.querySelector(".cart-quantity").innerHTML += item.quantity;
+  });
+  document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+}
