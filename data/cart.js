@@ -44,3 +44,11 @@ export function addToCart(addProdButton, prodId, event) {
   if (existItem) existItem.quantity += selectQuantity;
   else cart.push({ prodId, quantity: selectQuantity });
 }
+
+export function loadCart() {
+  return JSON.parse(localStorage.getItem("cart") || []);
+}
+
+export function saveCart(cart) {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}

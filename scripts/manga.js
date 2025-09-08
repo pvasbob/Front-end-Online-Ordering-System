@@ -1,5 +1,5 @@
 // import variables
-import { cart } from "../data/cart.js";
+import { cart, saveCart } from "../data/cart.js";
 import { products } from "../data/manga-source.js";
 // import function
 import { addToCart } from "../data/cart.js";
@@ -67,12 +67,9 @@ document
       addToCart(addProdButton, prodId, event);
       // update cart quantity.
       updateCartQuantity(cart);
+      saveCart(cart);
     });
   });
-
-// the class needs to be separated between .css and .js
-//  any classes used for .js should start with 'js'
-// .toFixed     : keep two decimal.
 
 // This function is about updating the webpage instead of handling the cart.
 // Basically any function which has algo inside is moved to other module .js.
@@ -88,3 +85,7 @@ function updateCartQuantity(cart) {
   });
   document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
 }
+
+// the class needs to be separated between .css and .js
+//  any classes used for .js should start with 'js'
+// .toFixed     : keep two decimal.
