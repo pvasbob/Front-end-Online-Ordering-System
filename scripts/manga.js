@@ -3,6 +3,8 @@ import { cart, saveCart } from "../data/cart.js";
 import { products } from "../data/manga-source.js";
 // import function
 import { addToCart } from "../data/cart.js";
+// import util function
+import { formatCurrency } from "./utils/cost.js";
 
 let productHTML = ``;
 products.forEach((prod, index) => {
@@ -24,7 +26,7 @@ products.forEach((prod, index) => {
         }</div>
       </div>
 
-      <div class="product-price">$${(prod.priceCents / 100).toFixed(2)}</div>
+      <div class="product-price">$${formatCurrency(prod.priceCents)}</div>
 
       <div class="product-quantity-container ">
         <select class="js-select-quantity-${prod.id}">

@@ -1,10 +1,11 @@
 import { loadCart } from "../data/cart.js";
 import { products } from "../data/manga-source.js";
+import { formatCurrency } from "./utils/cost.js";
 
 let cart = loadCart();
 
 let checkouthtml = ``;
-cart.forEach((cartItem) => {
+cart.forEach((cartItem, index) => {
   let existItem;
   products.forEach((item) => {
     if (cartItem.prodId === item.id) {
@@ -21,10 +22,10 @@ cart.forEach((cartItem) => {
 
           <div class="cart-item-details">
             <div class="product-name">${existItem.name}</div>
-            <div class="product-price">${(
-              (existItem.priceCents * cartItem.quantity) /
-              100
-            ).toFixed(2)}</div>
+            <div class="product-price">${formatCurrency(
+              existItem.priceCents * cartItem.quantity
+            )}</div>
+ 
             <div class="product-quantity">
               <span> Quantity: <span class="quantity-label">${
                 cartItem.quantity
@@ -47,7 +48,7 @@ cart.forEach((cartItem) => {
                 type="radio"
                 checked
                 class="delivery-option-input"
-                name="delivery-option-1"
+                name="delivery-option-${cartItem.prodId}"
               />
               <div>
                 <div class="delivery-option-date">Tuesday, June 21</div>
@@ -58,7 +59,7 @@ cart.forEach((cartItem) => {
               <input
                 type="radio"
                 class="delivery-option-input"
-                name="delivery-option-1"
+                name="delivery-option-${cartItem.prodId}"
               />
               <div>
                 <div class="delivery-option-date">Wednesday, June 15</div>
@@ -69,7 +70,7 @@ cart.forEach((cartItem) => {
               <input
                 type="radio"
                 class="delivery-option-input"
-                name="delivery-option-1"
+                name="delivery-option-${cartItem.prodId}"
               />
               <div>
                 <div class="delivery-option-date">Monday, June 13</div>
@@ -82,4 +83,11 @@ cart.forEach((cartItem) => {
     `;
 });
 
-document.querySelector(".order-summary").innerHTML = checkouthtml;
+document.querySelector(".js-order-summary").innerHTML = checkouthtml;
+
+// DONT DELETE
+//
+// document.querySelector(
+//   ".checkout-header-middle-section"
+// ).innerHTML = `          Checkout (<a class="return-to-home-link" href="amazon.html">${cart.length} items</a
+//           >)`;
