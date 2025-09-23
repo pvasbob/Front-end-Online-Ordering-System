@@ -1,4 +1,4 @@
-// export const cart = [];
+export let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 export function addToCart(cart, addProdButton, prodId, event) {
   // get the select quantity.

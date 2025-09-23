@@ -104,6 +104,13 @@ checkoutHTMLGenerate();
 
 deleteCart(loadCart());
 
+// This delete function can also be constructed by using the prod id.
+// use index is dangerous because any dynamically rearraning of the arry
+// will destroy the order.
+// Better way: add data-prod-id to checkoutHTMLGenerate();
+//             Use, construct class labeled with prodid,
+//                  and use element.remover()
+//             construct removeCart() to update cart.
 function deleteCart(cart) {
   // let cart = loadCart();
   document
