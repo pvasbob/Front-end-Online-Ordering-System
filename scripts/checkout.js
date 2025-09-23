@@ -1,19 +1,30 @@
-import { loadCart } from "../data/cart.js";
+import { loadCart, saveCart, updateCartQuantity } from "../data/cart.js";
 import { products } from "../data/manga-source.js";
 import { formatCurrency } from "./utils/cost.js";
 
-let cart = loadCart();
+// let cart = loadCart();
 
-let checkouthtml = ``;
-cart.forEach((cartItem, index) => {
-  let existItem;
-  products.forEach((item) => {
-    if (cartItem.prodId === item.id) {
-      existItem = item;
-    }
-  });
-  //
-  checkouthtml += `
+function checkoutHTMLGenerate() {
+  let cart = loadCart();
+
+  document.querySelector(
+    ".checkout-header-middle-section"
+  ).innerHTML = `          Checkout (<a class="return-to-home-link" href="amazon.html">${cart.length} items</a
+          >)`;
+
+  // cart.length;
+
+  let checkouthtml = ``;
+  cart.forEach((cartItem, index) => {
+    let existItem;
+    products.forEach((item) => {
+      if (cartItem.prodId === item.id) {
+        // existItem  belongs to products.
+        existItem = item;
+      }
+    });
+    //
+    checkouthtml += `
       <div class="cart-item-container">
         <div class="delivery-date">Delivery date: Tuesday, June 21</div>
 
@@ -33,7 +44,9 @@ cart.forEach((cartItem, index) => {
               <span class="update-quantity-link link-primary">
                 Update
               </span>
-              <span class="delete-quantity-link link-primary">
+              <span class="delete-quantity-link link-primary js-checkout-delete" data-prod-id-checkout="${
+                cartItem.prodId
+              }">
                 Delete
               </span>
             </div>
@@ -81,9 +94,45 @@ cart.forEach((cartItem, index) => {
         </div>
       </div>
     `;
-});
+  });
 
-document.querySelector(".js-order-summary").innerHTML = checkouthtml;
+  document.querySelector(".js-order-summary").innerHTML = checkouthtml;
+  deleteCart(cart);
+}
+
+checkoutHTMLGenerate();
+
+deleteCart(loadCart());
+
+function deleteCart(cart) {
+  // let cart = loadCart();
+  document
+    .querySelectorAll(".js-checkout-delete")
+    .forEach((checkoutDelete, index) => {
+      console.log("hello");
+      checkoutDelete.addEventListener("click", (event) => {
+        console.log(index);
+        cart.splice(index, 1);
+        console.log(cart);
+        saveCart(cart);
+        checkoutHTMLGenerate();
+      });
+    });
+}
+
+// checkoutHTMLGenerate();
+
+// const checkoutDeleteButton = document.querySelector(".js-checkout-delete");
+// checkoutDeleteButton.addEventListener("click", () => {
+//   checkoutDeleteHTMLGenerate();
+// });
+
+// function checkoutDeleteHTMLGenerate() {
+//   let cart = loadCart();
+//   cart.forEach((cartItem, index) => {
+//     console.log(cartItem.prodId);
+//   });
+// }
 
 // DONT DELETE
 //

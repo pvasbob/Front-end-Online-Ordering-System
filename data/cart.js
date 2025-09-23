@@ -1,6 +1,6 @@
-export const cart = [];
+// export const cart = [];
 
-export function addToCart(addProdButton, prodId, event) {
+export function addToCart(cart, addProdButton, prodId, event) {
   // get the select quantity.
   let selectQuantity = Number(
     addProdButton
@@ -9,6 +9,7 @@ export function addToCart(addProdButton, prodId, event) {
   );
 
   // Another way of getting the select quantity.
+  // event.target is equalt o addProdButton
   let selectQuantity_0 = Number(
     event.target
       .closest(".product-container")
@@ -45,10 +46,39 @@ export function addToCart(addProdButton, prodId, event) {
   else cart.push({ prodId, quantity: selectQuantity });
 }
 
+// export function loadCart() {
+//   return JSON.parse(localStorage.getItem("cart")) || [];
+// }
+
 export function loadCart() {
-  return JSON.parse(localStorage.getItem("cart") || []);
+  try {
+    const data = localStorage.getItem("cart");
+    return data ? JSON.parse(data) : [];
+  } catch (e) {
+    console.warn("Corrupted cart data in localStorage, resetting.", e);
+    return [];
+  }
 }
 
 export function saveCart(cart) {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
+
+// This function is about updating the webpage instead of handling the cart.
+// Basically any function which has algo inside is moved to other module .js.
+export function updateCartQuantity(cart) {
+  // update cart total quantity.
+  let cartQuantity = 0;
+  cart.forEach((item) => {
+    cartQuantity += item.quantity;
+    // DONT DELETE:
+    // The code below DOES NOT WORK becuase .innerHTML gives strings, so item.quantity
+    // will first be converted to string or character and then pile into .innerHTML
+    // document.querySelector(".cart-quantity").innerHTML += item.quantity;
+  });
+  document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+}
+
+// export function updateCartQuantity() {
+//   let updateCartEle = document.querySelector(".js-cart-quantity");
+// }

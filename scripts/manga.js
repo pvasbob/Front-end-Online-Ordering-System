@@ -1,10 +1,14 @@
 // import variables
-import { cart, saveCart } from "../data/cart.js";
+import { saveCart, loadCart, updateCartQuantity } from "../data/cart.js";
 import { products } from "../data/manga-source.js";
 // import function
 import { addToCart } from "../data/cart.js";
 // import util function
 import { formatCurrency } from "./utils/cost.js";
+//
+
+let cart = loadCart();
+updateCartQuantity(cart);
 
 let productHTML = ``;
 products.forEach((prod, index) => {
@@ -61,32 +65,19 @@ document.querySelector(".products-grid").innerHTML = productHTML;
 document
   .querySelectorAll(".js-add-to-cart-button")
   .forEach((addProdButton, index) => {
+    // the code below means event.target is equivalent to addProdButton,
+    // the element which event works on.
     addProdButton.addEventListener("click", (event) => {
       // get product id
       const prodId = addProdButton.dataset.prodId;
 
       // add to cart function.
-      addToCart(addProdButton, prodId, event);
+      addToCart(cart, addProdButton, prodId, event);
       // update cart quantity.
       updateCartQuantity(cart);
       saveCart(cart);
     });
   });
-
-// This function is about updating the webpage instead of handling the cart.
-// Basically any function which has algo inside is moved to other module .js.
-function updateCartQuantity(cart) {
-  // update cart total quantity.
-  let cartQuantity = 0;
-  cart.forEach((item) => {
-    cartQuantity += item.quantity;
-    // DONT DELETE:
-    // The code below DOES NOT WORK becuase .innerHTML gives strings, so item.quantity
-    // will first be converted to string or character and then pile into .innerHTML
-    // document.querySelector(".cart-quantity").innerHTML += item.quantity;
-  });
-  document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
-}
 
 // the class needs to be separated between .css and .js
 //  any classes used for .js should start with 'js'
