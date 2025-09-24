@@ -82,3 +82,13 @@ export function updateCartQuantity(cart) {
 // export function updateCartQuantity() {
 //   let updateCartEle = document.querySelector(".js-cart-quantity");
 // }
+
+export function removeItemCart(prodId) {
+  let newCart = [];
+  loadCart().forEach((cartItem, index) => {
+    if (cartItem.prodId !== prodId) {
+      newCart.push(cartItem);
+    }
+  });
+  return newCart;
+}

@@ -1,0 +1,22 @@
+localStorage in the browser is scoped per origin (protocol + domain + port), not per page.
+
+That means:
+
+Any page on the same origin (e.g. https://example.com/page1.html and https://example.com/page2.html) can read/write the same localStorage.
+
+Different origins get completely separate storage (e.g. https://example.com vs. https://sub.example.com or http://example.com).
+
+Closing/reopening the browser does not clear it (unless the user manually clears or you use sessionStorage instead).
+
+
+===============================================
+
+JavaScript Modules (type="module)
+
+Entry point: Only the main script needs to be in HTML with <script type="module" src="main.js"></script>.
+
+Imports automatically load modules: Any import { ... } from "./cart.js" causes the browser to fetch cart.js as a module automatically. You don’t need to put cart.js in HTML.
+
+Top-level code execution: All code at the top level in cart.js (not inside functions) runs once when first imported. If multiple modules import the same module, it does not re-run — the same module instance is reused.
+
+Exports: export allows other modules to access functions, variables, or objects from this module. Modules have their own scope; variables don’t leak to window.

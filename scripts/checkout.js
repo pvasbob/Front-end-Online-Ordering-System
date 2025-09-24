@@ -1,4 +1,9 @@
-import { loadCart, saveCart, updateCartQuantity } from "../data/cart.js";
+import {
+  loadCart,
+  saveCart,
+  updateCartQuantity,
+  removeItemCart,
+} from "../data/cart.js";
 import { products } from "../data/manga-source.js";
 import { formatCurrency } from "./utils/cost.js";
 
@@ -118,11 +123,19 @@ function deleteCart(cart) {
     .forEach((checkoutDelete, index) => {
       console.log("hello");
       checkoutDelete.addEventListener("click", (event) => {
-        console.log(index);
-        cart.splice(index, 1);
-        console.log(cart);
-        saveCart(cart);
-        checkoutHTMLGenerate();
+        // console.log(index);
+        // cart.splice(index, 1);
+        // console.log(cart);
+
+        checkoutDelete.closest(".cart-item-container").remove();
+        // remove the deleted item from cart
+        let newCart = removeItemCart(checkoutDelete.dataset.prodIdCheckout);
+
+        // save the modified cart to localStorage
+        saveCart(newCart);
+        // refresh the webpage.
+        // No need to the following checkoutHTMLGenerate() anymore becuase .remove() already remove the delete container, which is exactly the point of checkoutHTMLGenerate() to show the new page.
+        // checkoutHTMLGenerate();
       });
     });
 }
