@@ -81,6 +81,8 @@ checkoutHTMLGenerate();
 
 deleteCart(loadCart());
 
+updateDeliveryDateHTMLGenerate();
+
 // This delete function can also be constructed by using the prod id.
 // use index is dangerous because any dynamically rearraning of the arry
 // will destroy the order.
@@ -132,9 +134,6 @@ function deliveryOptionHTML(cartItemDotprodId, cartItem) {
     let isChecked =
       cartItem.deliveryOptionId === deliveryOption.id ? "checked" : "";
     // construct the deliveryHTML
-    console.log(cartItem.deliveryOptionId);
-    console.log(deliveryOption.id);
-    console.log(isChecked);
 
     deliveryHTML += `
       <div class="delivery-option">
@@ -153,9 +152,32 @@ function deliveryOptionHTML(cartItemDotprodId, cartItem) {
     `;
   });
 
-  console.log(deliveryHTML);
-
   return deliveryHTML;
+}
+
+function updateDeliveryDateHTMLGenerate() {
+  const deliveryEles = document.querySelectorAll(".delivery-option-input");
+
+  deliveryEles.forEach((deliveryEle, index) => {
+    const changeDateToEle = deliveryEle
+      .closest(".delivery-option")
+      .querySelector(".delivery-option-date");
+
+    // check which one is checked by default and update the delivery date.
+    if (deliveryEle.checked) changeDateToUpdateToDeliveryDate(changeDateToEle);
+    // Add EventList to update delivery change.
+    deliveryEle.addEventListener("change", () => {
+      changeDateToUpdateToDeliveryDate(changeDateToEle);
+    });
+  });
+}
+
+function changeDateToUpdateToDeliveryDate(changeDateToEle) {
+  changeDateToEle
+    .closest(".cart-item-container")
+    .querySelector(
+      ".delivery-date"
+    ).innerHTML = `Delivery date:  ${changeDateToEle.innerHTML}`;
 }
 
 function checkoutTitleUpdate(cart) {
