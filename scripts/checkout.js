@@ -142,6 +142,7 @@ function deliveryOptionHTML(cartItemDotprodId, cartItem) {
           ${isChecked}
           class="delivery-option-input"
           name="delivery-option-${cartItemDotprodId}"
+          data-delivery-id = ${deliveryOption.id}
         />
         <div>
           <div class="delivery-option-date">${dateString}</div>
@@ -156,6 +157,7 @@ function deliveryOptionHTML(cartItemDotprodId, cartItem) {
 }
 
 function updateDeliveryDateHTMLGenerate() {
+  let cart = loadCart();
   const deliveryEles = document.querySelectorAll(".delivery-option-input");
 
   deliveryEles.forEach((deliveryEle, index) => {
@@ -168,6 +170,14 @@ function updateDeliveryDateHTMLGenerate() {
     // Add EventList to update delivery change.
     deliveryEle.addEventListener("change", () => {
       changeDateToUpdateToDeliveryDate(changeDateToEle);
+      console.log(deliveryEle);
+      const changeToId = deliveryEle.name.substring("delivery-option-".length);
+      cart.forEach((cartItem, index) => {
+        if (cartItem.prodId === changeToId)
+          cartItem.deliveryOptionId = deliveryEle.dataset.deliveryId;
+      });
+
+      saveCart(cart);
     });
   });
 }
