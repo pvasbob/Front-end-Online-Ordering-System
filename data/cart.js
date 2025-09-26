@@ -43,7 +43,7 @@ export function addToCart(cart, addProdButton, prodId, event) {
   });
 
   if (existItem) existItem.quantity += selectQuantity;
-  else cart.push({ prodId, quantity: selectQuantity });
+  else cart.push({ prodId, quantity: selectQuantity, deliveryOptionId: "1" });
 }
 
 // export function loadCart() {

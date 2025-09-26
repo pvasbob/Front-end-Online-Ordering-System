@@ -20,3 +20,22 @@ Imports automatically load modules: Any import { ... } from "./cart.js" causes t
 Top-level code execution: All code at the top level in cart.js (not inside functions) runs once when first imported. If multiple modules import the same module, it does not re-run — the same module instance is reused.
 
 Exports: export allows other modules to access functions, variables, or objects from this module. Modules have their own scope; variables don’t leak to window.
+
+===============================================
+
+Each HTML page has its own separate JavaScript environment. “Global” only means global within that page.
+
+===============================================
+
+ESM = EcmaScript Module
+EcmaScript is another name of JavaScript
+
+===============================================
+
+Default export (only one per file, name chosen by the importer).
+A module can have only one default export.
+
+Named exports (zero or more per file, must match the given names).
+A module can have many named exports.
+
+===============================================

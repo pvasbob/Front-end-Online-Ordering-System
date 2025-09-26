@@ -3,19 +3,24 @@ import {
   saveCart,
   updateCartQuantity,
   removeItemCart,
+  cart,
 } from "../data/cart.js";
 import { products } from "../data/manga-source.js";
 import { formatCurrency } from "./utils/cost.js";
+// external library
+// import  function from external lib
+import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
+// import default function from external lib
+import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
+
+import { deliveryOptions } from "../data/deliveryOptions.js";
 
 // let cart = loadCart();
 
 function checkoutHTMLGenerate() {
   let cart = loadCart();
 
-  document.querySelector(
-    ".checkout-header-middle-section"
-  ).innerHTML = `          Checkout (<a class="return-to-home-link" href="amazon.html">${cart.length} items</a
-          >)`;
+  checkoutTitleUpdate(cart);
 
   // cart.length;
 
@@ -61,40 +66,7 @@ function checkoutHTMLGenerate() {
             <div class="delivery-options-title">
               Choose a delivery option:
             </div>
-            <div class="delivery-option">
-              <input
-                type="radio"
-                checked
-                class="delivery-option-input"
-                name="delivery-option-${cartItem.prodId}"
-              />
-              <div>
-                <div class="delivery-option-date">Tuesday, June 21</div>
-                <div class="delivery-option-price">FREE Shipping</div>
-              </div>
-            </div>
-            <div class="delivery-option">
-              <input
-                type="radio"
-                class="delivery-option-input"
-                name="delivery-option-${cartItem.prodId}"
-              />
-              <div>
-                <div class="delivery-option-date">Wednesday, June 15</div>
-                <div class="delivery-option-price">$4.99 - Shipping</div>
-              </div>
-            </div>
-            <div class="delivery-option">
-              <input
-                type="radio"
-                class="delivery-option-input"
-                name="delivery-option-${cartItem.prodId}"
-              />
-              <div>
-                <div class="delivery-option-date">Monday, June 13</div>
-                <div class="delivery-option-price">$9.99 - Shipping</div>
-              </div>
-            </div>
+            ${deliveryOptionHTML(cartItem.prodId, cartItem)}
           </div>
         </div>
       </div>
@@ -121,7 +93,6 @@ function deleteCart(cart) {
   document
     .querySelectorAll(".js-checkout-delete")
     .forEach((checkoutDelete, index) => {
-      console.log("hello");
       checkoutDelete.addEventListener("click", (event) => {
         // console.log(index);
         // cart.splice(index, 1);
@@ -133,6 +104,10 @@ function deleteCart(cart) {
 
         // save the modified cart to localStorage
         saveCart(newCart);
+
+        // checkoutHTMLGenerate();
+        checkoutTitleUpdate(newCart);
+
         // refresh the webpage.
         // No need to the following checkoutHTMLGenerate() anymore becuase .remove() already remove the delete container, which is exactly the point of checkoutHTMLGenerate() to show the new page.
         // checkoutHTMLGenerate();
@@ -140,23 +115,60 @@ function deleteCart(cart) {
     });
 }
 
-// checkoutHTMLGenerate();
+function deliveryOptionHTML(cartItemDotprodId, cartItem) {
+  let deliveryHTML = ``;
+  deliveryOptions.forEach((deliveryOption, index) => {
+    // construct the deliverDate
+    const today = dayjs();
+    const deliveryDate = today.add(deliveryOption.deliveryDays, "days");
+    const dateString = deliveryDate.format("dddd, MMMM D");
+    // construct price
+    const priceString =
+      deliveryOption.priceCents === 0
+        ? "FREE"
+        : `$${formatCurrency(deliveryOption.priceCents)} - `;
 
-// const checkoutDeleteButton = document.querySelector(".js-checkout-delete");
-// checkoutDeleteButton.addEventListener("click", () => {
-//   checkoutDeleteHTMLGenerate();
-// });
+    //
+    let isChecked =
+      cartItem.deliveryOptionId === deliveryOption.id ? "checked" : "";
+    // construct the deliveryHTML
+    console.log(cartItem.deliveryOptionId);
+    console.log(deliveryOption.id);
+    console.log(isChecked);
 
-// function checkoutDeleteHTMLGenerate() {
-//   let cart = loadCart();
-//   cart.forEach((cartItem, index) => {
-//     console.log(cartItem.prodId);
-//   });
-// }
+    deliveryHTML += `
+      <div class="delivery-option">
+        <input
+          type="radio"
+          ${isChecked}
+          class="delivery-option-input"
+          name="delivery-option-${cartItemDotprodId}"
+        />
+        <div>
+          <div class="delivery-option-date">${dateString}</div>
+          <div class="delivery-option-price"> ${priceString} Shipping</div>
+        </div>
+      </div>
 
+    `;
+  });
+
+  console.log(deliveryHTML);
+
+  return deliveryHTML;
+}
+
+function checkoutTitleUpdate(cart) {
+  document.querySelector(
+    ".checkout-header-middle-section"
+  ).innerHTML = `          Checkout (<a class="return-to-home-link" href="amazon.html">${cart.length} items</a
+          >)`;
+}
 // DONT DELETE
 //
 // document.querySelector(
 //   ".checkout-header-middle-section"
 // ).innerHTML = `          Checkout (<a class="return-to-home-link" href="amazon.html">${cart.length} items</a
 //           >)`;
+
+// ${deliveryOptionHTML(cartItem.prodId, cartItem)}
