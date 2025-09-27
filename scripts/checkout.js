@@ -4,6 +4,7 @@ import {
   updateCartQuantity,
   removeItemCart,
   cart,
+  updateDeliveryOptionCart,
 } from "../data/cart.js";
 import { products } from "../data/manga-source.js";
 import { formatCurrency } from "./utils/cost.js";
@@ -25,7 +26,7 @@ function checkoutHTMLGenerate() {
   // cart.length;
 
   let checkouthtml = ``;
-  cart.forEach((cartItem, index) => {
+  loadCart().forEach((cartItem, index) => {
     let existItem;
     products.forEach((item) => {
       if (cartItem.prodId === item.id) {
@@ -157,29 +158,32 @@ function deliveryOptionHTML(cartItemDotprodId, cartItem) {
 }
 
 function updateDeliveryDateHTMLGenerate() {
-  let cart = loadCart();
-  const deliveryEles = document.querySelectorAll(".delivery-option-input");
+  document
+    .querySelectorAll(".delivery-option-input")
+    .forEach((deliveryEle, index) => {
+      const changeDateToEle = deliveryEle
+        .closest(".delivery-option")
+        .querySelector(".delivery-option-date");
 
-  deliveryEles.forEach((deliveryEle, index) => {
-    const changeDateToEle = deliveryEle
-      .closest(".delivery-option")
-      .querySelector(".delivery-option-date");
-
-    // check which one is checked by default and update the delivery date.
-    if (deliveryEle.checked) changeDateToUpdateToDeliveryDate(changeDateToEle);
-    // Add EventList to update delivery change.
-    deliveryEle.addEventListener("change", () => {
-      changeDateToUpdateToDeliveryDate(changeDateToEle);
-      console.log(deliveryEle);
-      const changeToId = deliveryEle.name.substring("delivery-option-".length);
-      cart.forEach((cartItem, index) => {
-        if (cartItem.prodId === changeToId)
-          cartItem.deliveryOptionId = deliveryEle.dataset.deliveryId;
+      // check which one is checked by default and update the delivery date.
+      if (deliveryEle.checked)
+        changeDateToUpdateToDeliveryDate(changeDateToEle);
+      // Add EventList to update delivery change.
+      deliveryEle.addEventListener("change", () => {
+        changeDateToUpdateToDeliveryDate(changeDateToEle);
+        console.log(deliveryEle);
+        // save delivery option to cart.
+        const changeToId = deliveryEle.name.substring(
+          "delivery-option-".length
+        );
+        // cart.js
+        updateDeliveryOptionCart(
+          loadCart(),
+          changeToId,
+          deliveryEle.dataset.deliveryId
+        );
       });
-
-      saveCart(cart);
     });
-  });
 }
 
 function changeDateToUpdateToDeliveryDate(changeDateToEle) {

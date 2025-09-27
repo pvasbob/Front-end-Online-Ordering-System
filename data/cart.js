@@ -92,3 +92,12 @@ export function removeItemCart(prodId) {
   });
   return newCart;
 }
+
+export function updateDeliveryOptionCart(cart, productId, deliveryOptionId) {
+  cart.forEach((cartItem, index) => {
+    if (cartItem.prodId === productId)
+      cartItem.deliveryOptionId = deliveryOptionId;
+  });
+
+  saveCart(cart);
+}
