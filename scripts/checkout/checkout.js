@@ -3,22 +3,20 @@ import {
   saveCart,
   updateCartQuantity,
   removeItemCart,
-  cart,
   updateDeliveryOptionCart,
-} from "../data/cart.js";
-import { products } from "../data/manga-source.js";
-import { formatCurrency } from "./utils/cost.js";
+} from "../../data/cart.js";
+import { products } from "../../data/manga-source.js";
+import { formatCurrency } from "../utils/cost.js";
 // external library
 // import  function from external lib
-import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
 // import default function from external lib
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 
-import { deliveryOptions } from "../data/deliveryOptions.js";
+import { deliveryOptions } from "../../data/deliveryOptions.js";
+import { orderSummaryHTMLGenerate } from "./orderSummary.js";
 
-// let cart = loadCart();
-
-function checkoutHTMLGenerate() {
+//  Definition of functions
+export function checkoutHTMLGenerate() {
   let cart = loadCart();
 
   checkoutTitleUpdate(cart);
@@ -78,12 +76,6 @@ function checkoutHTMLGenerate() {
   deleteCart(cart);
 }
 
-checkoutHTMLGenerate();
-
-deleteCart(loadCart());
-
-updateDeliveryDateHTMLGenerate();
-
 // This delete function can also be constructed by using the prod id.
 // use index is dangerous because any dynamically rearraning of the arry
 // will destroy the order.
@@ -91,7 +83,7 @@ updateDeliveryDateHTMLGenerate();
 //             Use, construct class labeled with prodid,
 //                  and use element.remover()
 //             construct removeCart() to update cart.
-function deleteCart(cart) {
+export function deleteCart(cart) {
   // let cart = loadCart();
   document
     .querySelectorAll(".js-checkout-delete")
@@ -110,6 +102,9 @@ function deleteCart(cart) {
 
         // checkoutHTMLGenerate();
         checkoutTitleUpdate(newCart);
+
+        // update order summary
+        orderSummaryHTMLGenerate();
 
         // refresh the webpage.
         // No need to the following checkoutHTMLGenerate() anymore becuase .remove() already remove the delete container, which is exactly the point of checkoutHTMLGenerate() to show the new page.
@@ -157,7 +152,7 @@ function deliveryOptionHTML(cartItemDotprodId, cartItem) {
   return deliveryHTML;
 }
 
-function updateDeliveryDateHTMLGenerate() {
+export function updateDeliveryDateHTMLGenerate() {
   document
     .querySelectorAll(".delivery-option-input")
     .forEach((deliveryEle, index) => {
@@ -182,6 +177,8 @@ function updateDeliveryDateHTMLGenerate() {
           changeToId,
           deliveryEle.dataset.deliveryId
         );
+        // update order summary
+        orderSummaryHTMLGenerate();
       });
     });
 }
