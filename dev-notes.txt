@@ -59,6 +59,9 @@ MVC is a design pattern, makes sure the page always mathces the data.
 3. Make it interactive    Controller
 
 ===============================================
+
+group of related tests = test suite
+
 ===============================================
 ===============================================
 ===============================================
