@@ -63,6 +63,9 @@ MVC is a design pattern, makes sure the page always mathces the data.
 group of related tests = test suite
 
 ===============================================
+
+in jasmine, spec = test
+
 ===============================================
 ===============================================
 ===============================================
