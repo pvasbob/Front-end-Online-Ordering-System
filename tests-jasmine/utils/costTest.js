@@ -1,4 +1,4 @@
-import formatCurrency from "../scripts/utils/cost.js";
+import formatCurrency from "../../scripts/utils/cost.js";
 
 describe("test suite: formatCurrency", () => {
   it("converts cents into dollors", () => {

@@ -67,9 +67,63 @@ group of related tests = test suite
 in jasmine, spec = test
 
 ===============================================
+
+Flaky Test = test that sometimes passes and sometimes fails
+Mocks = lets us replace a method with a fake version. 
+
+Test cases and test suites
+Testing Framework
+Mock and spy on methods
+Test web pages using integration tests
+Hooks
+
 ===============================================
+
+let cart;
+is a shorthand for :
+let cart = undefined; 
+
 ===============================================
+
+in an object you can not use 'export', 'let'
+
+in an object, the definition of a function needs to use 
+regular function syntax, not an arrow function. This is usual called a method. 
+
+In defining a method in object, there is a shorthand:
+
+loadFromStorage: function() {}
+loadFromStorage() {}
+
 ===============================================
+
+'this' used inside a method or inside a regular funcion. 
+
+when 'this' is used inside method which is inside an class, 
+  'this' points to the object.
+
+Third situation is, when 'this' is used inside a arrow function.  'this' will keep the value outside the arrow function. This design is to avoid override the 'this'.
+
+
+when 'this' is used inside a regular function (not inside a class), 'this' is undefined by default. 
+
+But, if the regular function called .call('xxx') like below:
+
+functionName.call('hell')
+then the 'this' will be replaced by 'hello'. 
+
+This is equivalent to say that, by using .call(), we can add extra paramter to a function, should, say, we temporarily need an extra parameter and we dont want to rewrite a function definition. 
+
+
+1. Inside a method, 'this' points to the outer object.
+2. Inside a function, this = undefined.
+    But we can change it to whatever we want, by using .call().
+3. Arrow functions do not change the value of 'this'. 
+
+The rule is: 
+  If there is an object to point to, 'this' will point to the object. 
+  If there is no object to point to, 'this' will be undefined, and we have tools like .call() and arrow function to help manipulate the value of 'this' to be what we want. 
+
 ===============================================
 ===============================================
 ===============================================
