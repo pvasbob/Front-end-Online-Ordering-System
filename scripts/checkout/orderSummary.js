@@ -9,6 +9,8 @@ import {
 import formatCurrency from "../utils/cost.js";
 import { deliveryOptions } from "../../data/deliveryOptions.js";
 
+import "../../data/backend-practice.js";
+
 // Generate the HTML of chekcout page
 checkoutHTMLGenerate();
 // add eventlistener to delete button
@@ -79,7 +81,6 @@ export function orderSummaryHTMLGenerate() {
 function cartTotalPriceCents() {
   let m_cartTotalPriceCents = 0;
   loadCart().forEach((cartItem, index) => {
-    console.log(cartItem);
     products.forEach((prod, index) => {
       if (prod.id === cartItem.prodId) {
         m_cartTotalPriceCents += prod.priceCents * cartItem.quantity;
@@ -93,7 +94,6 @@ function cartTotalPriceCents() {
 function shippingHandling_v() {
   let m_cartTotalPriceCents = 0;
   loadCart().forEach((cartItem, index) => {
-    console.log(cartItem);
     products.forEach((prod, index) => {
       if (prod.id === cartItem.prodId) {
         m_cartTotalPriceCents += prod.priceCents * cartItem.quantity;
@@ -115,7 +115,6 @@ function shippingHandling() {
     });
   });
 
-  console.log(shippingPriceCents);
   return shippingPriceCents;
 }
 

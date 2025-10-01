@@ -125,7 +125,13 @@ The rule is:
   If there is no object to point to, 'this' will be undefined, and we have tools like .call() and arrow function to help manipulate the value of 'this' to be what we want. 
 
 ===============================================
+
+Polymorphisum = calling a method without needing to know the classes.
+
 ===============================================
+
+backend = another computer that manages the data of a website.
+
 ===============================================
 ===============================================
 ===============================================
