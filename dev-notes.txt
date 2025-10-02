@@ -131,6 +131,7 @@ Polymorphisum = calling a method without needing to know the classes.
 ===============================================
 
 backend = another computer that manages the data of a website.
+Callback = a function to run in the future.
 
 ===============================================
 ===============================================

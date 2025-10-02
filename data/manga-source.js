@@ -187,3 +187,18 @@ export const products = [
 ];
 
 //
+//get JSON file from backend
+export let products_supersimpledev = [];
+
+function loadProducts() {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener("load", () => {
+    return JSON.parse(xhr.response);
+  });
+
+  xhr.open("GET", "https://supersimplebackend.dev/products");
+  xhr.send();
+}
+
+loadProducts();
