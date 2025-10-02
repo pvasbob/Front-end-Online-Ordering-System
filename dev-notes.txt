@@ -133,11 +133,69 @@ Polymorphisum = calling a method without needing to know the classes.
 backend = another computer that manages the data of a website.
 Callback = a function to run in the future.
 
+How to use backend in a product:
+1. Send request.
+2. Use a Callback to wait for the response.
+3. Run the rest of the code. 
+
+
+Multiple callbacks cause a log of nesting.
+Use promises instead of callbacks.
+Promises keep our code more flat.
+
 ===============================================
+
+handle asynchronus code:
+1. Callback => cause heavy nested functions. 
+2. promise, fetch.  => better, make code flatten.
+3. Async Await.  => promises have lots of extra code. 
+      Async Await is a short cut for promises. even better.
+
+      syntax:
+      async function functionName() {}
+
+    async = makes a function return a promise, even though 
+            the function itself has return statement. The 
+            value in return statement is passesd to the then() 
+            parameter if it has a then() 
+    await = lets us wait for a promise to finish, let us
+            write asynchronous code like  normal code.
+
+    We can only use await insid ea async function.
+
+
 ===============================================
+
+  async await can only be used with promises. It doesn't do 
+    anything to the callback.
+  
+  The closest function has to be async.
+
+  In await, values inside resolve() is returned.
+  
 ===============================================
+
+Create own backend.
+
+1. Command line >_
+2. NodeJS = create our own backend.
+
 ===============================================
-===============================================
+
+Javascript Framework:
+
+helps you render stuff(it's a rendering system)
+
+Rendering = displaying something on a webpage
+
+1. Rendering        => View
+2. Data handling    => Model
+3. Event handling   => Controller
+
+ReactJS
+VueJS
+Angular
+
 ===============================================
 ===============================================
 ===============================================
